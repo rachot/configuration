@@ -1,0 +1,8 @@
+sudo ./canmod.sh
+sudo ./fan.sh
+roslaunch cleanbot_description cleanbot_description.launch
+roslaunch cleanbot_description cleanbot_roboteq.launch
+roslaunch turtlebot3_slam turtlebot3_gmapping.launch
+roslaunch realsense2_camera rs_d400_and_t265.launch
+
+roslaunch pointcloud_to_laserscan sample_node.launch

@@ -1,0 +1,62 @@
+sudo modprobe can
+sudo modprobe mttcan
+sudo modprobe can-raw
+
+sudo modprobe mcp251x
+sudo ip link set can0 up type can bitrate 250000
+
+Read voltage 5V output
+rosrun socketcan_interface socketcan_bcm can0 1 601#480D2103
+
+Command Motor
+rosrun socketcan_interface socketcan_bcm can0 1 601#280220023200
+
+
+
+CAN frame format
+address | # | CMD | INDEX_MSB | INDEX_LSB | SUBINDEX | DATA_LSB | DATA | DATA | DATA_MSB |
+
+CMD:
+23 = data 4 bytes send
+2B = data 2 bytes send
+
+Motor 1 position at 100
+601#2300200164000000
+Motor 1 position at 500
+601#23002001F4010000
+Motor 1 position at 900
+601#2300200184030000
+
+Motor 1 position at -100
+601#230020019CFFFFFF
+Motor 1 position at -500
+601#230020010CFEFFFF
+Motor 1 position at -900
+601#230020017CFCFFFF
+
+
+Motor 2 speed 0 rpm
+601#2300200200000000
+Motor 2 speed 1 rpm
+601#2300200201000000
+Motor 2 speed 10 rpm
+601#230020020A000000
+Motor 2 speed 25 rpm
+601#2300200219000000
+
+Motor 2 speed 0 rpm
+601#2300200200000000
+Motor 2 speed -1 rpm
+601#23002002FFFFFFFF
+Motor 2 speed -10 rpm
+601#23002002F6FFFFFF
+Motor 2 speed -25 rpm
+601#23002002E7FFFFFF
+
+Read motor speed(RPM):
+601#40032102
+
+Read motor position(-1000 - 1000):
+601#40252101
+
+
